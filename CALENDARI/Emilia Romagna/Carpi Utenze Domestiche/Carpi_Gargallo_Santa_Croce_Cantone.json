@@ -1,0 +1,55 @@
+﻿{
+  "schemaVersion": 1,
+  "appVersionName": "1.0",
+  "exportedAt": "2026-08-06T00:00:00.000000",
+  "comuni": [
+    {
+      "name": "Carpi Gargallo - Santa Croce - Cantone",
+      "notificationsEnabled": true,
+      "entries": [
+        {
+          "dayOfWeek": "MONDAY",
+          "wasteType": "UMIDO",
+          "frequency": "ALL",
+          "startDate": null
+        },
+        {
+          "dayOfWeek": "TUESDAY",
+          "wasteType": "PLASTICA_METALLO",
+          "frequency": "ALL",
+          "startDate": null
+        },
+        {
+          "dayOfWeek": "WEDNESDAY",
+          "wasteType": "CARTA_CARTONE",
+          "frequency": "EVERY_2_WEEKS",
+          "startDate": "2026-08-12"
+        },
+        {
+          "dayOfWeek": "WEDNESDAY",
+          "wasteType": "INDIFFERENZIATO",
+          "frequency": "EVERY_2_WEEKS",
+          "startDate": "2026-08-12"
+        },
+        {
+          "dayOfWeek": "WEDNESDAY",
+          "wasteType": "VETRO",
+          "frequency": "EVERY_4_WEEKS",
+          "startDate": "2026-08-19"
+        },
+        {
+          "dayOfWeek": "THURSDAY",
+          "wasteType": "SFALCI_POTATURE",
+          "frequency": "ALL",
+          "startDate": null
+        },
+        {
+          "dayOfWeek": "THURSDAY",
+          "wasteType": "UMIDO",
+          "frequency": "ALL",
+          "startDate": null
+        }
+      ]
+    }
+  ]
+}
