@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raccolta Rifiuti - Calendari JSON</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f6f8fa;
+            color: #24292f;
+        }
+        h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        p { color: #57606a; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .tree { background: #fff; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; }
+        .item { display: flex; align-items: center; padding: 4px 0; }
+        .folder { cursor: pointer; font-weight: 600; color: #0969da; }
+        .folder:hover { text-decoration: underline; }
+        .file { color: #24292f; }
+        .icon { width: 20px; text-align: center; margin-right: 6px; }
+        .children { margin-left: 24px; border-left: 1px solid #d0d7de; padding-left: 8px; display: none; }
+        .children.open { display: block; }
+        .badge {
+            font-size: 0.75rem;
+            background: #ddf4ff;
+            color: #0969da;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: auto;
+            text-decoration: none;
+        }
+        .badge:hover { background: #b6e3ff; }
+        .loading { color: #57606a; font-style: italic; padding: 8px 0; }
+        .error { color: #cf222e; background: #ffebe9; padding: 8px 12px; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <h1>📁 Calendari Raccolta Rifiuti</h1>
+    <p>Naviga le cartelle e scarica i file JSON. I dati vengono letti direttamente dalla repository.</p>
+    <div id="tree" class="tree">
+        <div class="loading">Caricamento struttura...</div>
+    </div>
+
+<script>
+const OWNER = 'HomerJSimpson';
+const REPO  = 'Raccolta-Rifiuti';
+const ROOT_PATH = 'CALENDARI';
+
+async function fetchContents(path) {
+    const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(path)}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Errore ${res.status}: ${res.statusText}`);
+    return res.json();
+}
+
+function createFolderElement(name, path) {
+    const div = document.createElement('div');
+    const row = document.createElement('div');
+    row.className = 'item folder';
+    row.innerHTML = `<span class="icon">📁</span><span>${name}</span>`;
+    
+    const children = document.createElement('div');
+    children.className = 'children';
+    
+    let loaded = false;
+    row.addEventListener('click', async () => {
+        children.classList.toggle('open');
+        if (!loaded) {
+            loaded = true;
+            await loadPath(path, children);
+        }
+    });
+    
+    div.appendChild(row);
+    div.appendChild(children);
+    return div;
+}
+
+function createFileElement(name, downloadUrl, htmlUrl) {
+    const div = document.createElement('div');
+    div.className = 'item file';
+    div.innerHTML = `
+        <span class="icon">📄</span>
+        <span>${name}</span>
+        <a class="badge" href="${downloadUrl}" download target="_blank">Scarica JSON</a>
+    `;
+    return div;
+}
+
+async function loadPath(path, container) {
+    container.innerHTML = '<div class="loading">Caricamento...</div>';
+    try {
+        const items = await fetchContents(path);
+        container.innerHTML = '';
+        // Ordina: cartelle prima, poi file
+        items.sort((a, b) => {
+            if (a.type === b.type) return a.name.localeCompare(b.name);
+            return a.type === 'dir' ? -1 : 1;
+        });
+        for (const item of items) {
+            if (item.type === 'dir') {
+                container.appendChild(createFolderElement(item.name, item.path));
+            } else if (item.name.endsWith('.json')) {
+                container.appendChild(createFileElement(item.name, item.download_url, item.html_url));
+            }
+        }
+        if (container.children.length === 0) {
+            container.innerHTML = '<div class="loading">Nessun file JSON qui.</div>';
+        }
+    } catch (err) {
+        container.innerHTML = `<div class="error">⚠️ ${err.message}</div>`;
+    }
+}
+
+// Avvio
+loadPath(ROOT_PATH, document.getElementById('tree'));
+</script>
+</body>
+</html>
