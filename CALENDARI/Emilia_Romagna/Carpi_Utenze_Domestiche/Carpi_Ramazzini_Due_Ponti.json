@@ -1,0 +1,55 @@
+﻿{
+  "schemaVersion": 1,
+  "appVersionName": "1.0",
+  "exportedAt": "2026-08-06T00:00:00.000000",
+  "comuni": [
+    {
+      "name": "Carpi Ramazzini - Due Ponti",
+      "notificationsEnabled": true,
+      "entries": [
+        {
+          "dayOfWeek": "MONDAY",
+          "wasteType": "PLASTICA_METALLO",
+          "frequency": "ALL",
+          "startDate": null
+        },
+        {
+          "dayOfWeek": "MONDAY",
+          "wasteType": "VETRO",
+          "frequency": "EVERY_4_WEEKS",
+          "startDate": "2026-08-31"
+        },
+        {
+          "dayOfWeek": "TUESDAY",
+          "wasteType": "CARTA_CARTONE",
+          "frequency": "EVERY_2_WEEKS",
+          "startDate": "2026-08-18"
+        },
+        {
+          "dayOfWeek": "WEDNESDAY",
+          "wasteType": "SFALCI_POTATURE",
+          "frequency": "ALL",
+          "startDate": null
+        },
+        {
+          "dayOfWeek": "WEDNESDAY",
+          "wasteType": "UMIDO",
+          "frequency": "ALL",
+          "startDate": null
+        },
+        {
+          "dayOfWeek": "SATURDAY",
+          "wasteType": "INDIFFERENZIATO",
+          "frequency": "EVERY_2_WEEKS",
+          "startDate": "2026-08-08"
+        },
+        {
+          "dayOfWeek": "SATURDAY",
+          "wasteType": "UMIDO",
+          "frequency": "ALL",
+          "startDate": null
+        }
+      ]
+    }
+  ]
+}

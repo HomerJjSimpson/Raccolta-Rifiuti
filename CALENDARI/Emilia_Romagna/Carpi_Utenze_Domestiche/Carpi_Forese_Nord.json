@@ -1,0 +1,49 @@
+﻿{
+  "schemaVersion": 1,
+  "appVersionName": "1.0",
+  "exportedAt": "2026-08-06T00:00:00.000000",
+  "comuni": [
+    {
+      "name": "Carpi Forese Nord",
+      "notificationsEnabled": true,
+      "entries": [
+        {
+          "dayOfWeek": "TUESDAY",
+          "wasteType": "INDIFFERENZIATO",
+          "frequency": "EVERY_2_WEEKS",
+          "startDate": "2026-08-11"
+        },
+        {
+          "dayOfWeek": "THURSDAY",
+          "wasteType": "PLASTICA_METALLO",
+          "frequency": "EVERY_2_WEEKS",
+          "startDate": "2026-08-13"
+        },
+        {
+          "dayOfWeek": "THURSDAY",
+          "wasteType": "SFALCI_POTATURE",
+          "frequency": "ALL",
+          "startDate": null
+        },
+        {
+          "dayOfWeek": "THURSDAY",
+          "wasteType": "UMIDO",
+          "frequency": "ALL",
+          "startDate": null
+        },
+        {
+          "dayOfWeek": "FRIDAY",
+          "wasteType": "CARTA_CARTONE",
+          "frequency": "EVERY_2_WEEKS",
+          "startDate": "2026-08-07"
+        },
+        {
+          "dayOfWeek": "SATURDAY",
+          "wasteType": "VETRO",
+          "frequency": "EVERY_4_WEEKS",
+          "startDate": "2026-08-22"
+        }
+      ]
+    }
+  ]
+}
